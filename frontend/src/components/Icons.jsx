@@ -1,0 +1,13 @@
+const p = { width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true };
+export const Swap = (props) => <svg {...p} {...props}><path d="M7 4v14m0 0-3-3m3 3 3-3M17 20V6m0 0-3 3m3-3 3 3" /></svg>;
+export const Train = (props) => <svg {...p} {...props}><rect x="5" y="3" width="14" height="14" rx="3" /><path d="M5 11h14M9 21l2-4m4 4-2-4M9 14h.01M15 14h.01" /></svg>;
+export const Clock = (props) => <svg {...p} {...props}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
+export const Shield = (props) => <svg {...p} {...props}><path d="M12 3l8 3v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6l8-3z" /><path d="m9 12 2 2 4-4" /></svg>;
+export const Check = (props) => <svg {...p} {...props}><path d="m5 12 5 5 9-10" /></svg>;
+export const Cross = (props) => <svg {...p} {...props}><path d="M6 6l12 12M18 6 6 18" /></svg>;
+export const User = (props) => <svg {...p} {...props}><circle cx="12" cy="8" r="4" /><path d="M4 21c1-4 4-6 8-6s7 2 8 6" /></svg>;
+export const Ticket = (props) => <svg {...p} {...props}><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4V8z" /><path d="M14 6v12" strokeDasharray="2 2.5" /></svg>;
+export const Lock = (props) => <svg {...p} {...props}><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>;
+export const Chart = (props) => <svg {...p} {...props}><path d="M4 20V4m0 16h16M8 16v-5m4 5V8m4 8v-3" /></svg>;
+export const Plus = (props) => <svg {...p} {...props}><path d="M12 5v14M5 12h14" /></svg>;
+export const Arrow = (props) => <svg {...p} {...props}><path d="M5 12h14m-5-5 5 5-5 5" /></svg>;

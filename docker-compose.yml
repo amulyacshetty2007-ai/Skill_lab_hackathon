@@ -1,0 +1,51 @@
+# One command: docker compose up --build
+#   App        http://localhost:8080
+#   API        http://localhost:4000/api/health
+#   Database   localhost:5433  (for Beekeeper Studio, see README)
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: railrush
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-railrush_dev_password}
+      POSTGRES_DB: railrush
+    ports:
+      - "127.0.0.1:5433:5432"          # bound to localhost only: not reachable from the network
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U railrush -d railrush"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+      DATABASE_URL: postgres://railrush:${POSTGRES_PASSWORD:-railrush_dev_password}@db:5432/railrush
+      JWT_SECRET: ${JWT_SECRET:-change-me-demo-secret-change-me-demo-secret-0123456789}
+      ORGANISER_INVITE_CODE: ${ORGANISER_INVITE_CODE:-RAILRUSH-ORG-2026}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:8080}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}     # set true when you serve over HTTPS
+      TRUST_PROXY: 1                             # one proxy (nginx) in front
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
+    ports:
+      - "127.0.0.1:4000:4000"
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
